@@ -706,21 +706,21 @@ static ssize_t led_blink_store(struct device *dev,
 }
 
 /* permission for sysfs node */
-static DEVICE_ATTR(delay_on, 0640, led_delay_on_show, led_delay_on_store);
-static DEVICE_ATTR(delay_off, 0640, led_delay_off_show, led_delay_off_store);
-static DEVICE_ATTR(blink, 0640, NULL, led_blink_store);
+static DEVICE_ATTR(delay_on, S_IRUGO|S_IWUSR, led_delay_on_show, led_delay_on_store);
+static DEVICE_ATTR(delay_off, S_IRUGO|S_IWUSR, led_delay_off_show, led_delay_off_store);
+static DEVICE_ATTR(blink, S_IWUSR, NULL, led_blink_store);
 
 #ifdef SEC_LED_SPECIFIC
 /* below nodes is SAMSUNG specific nodes */
-static DEVICE_ATTR(led_r, 0660, NULL, store_led_r);
-static DEVICE_ATTR(led_g, 0660, NULL, store_led_g);
-static DEVICE_ATTR(led_b, 0660, NULL, store_led_b);
+static DEVICE_ATTR(led_r, S_IWUSR|S_IWGRP, NULL, store_led_r);
+static DEVICE_ATTR(led_g, S_IWUSR|S_IWGRP, NULL, store_led_g);
+static DEVICE_ATTR(led_b, S_IWUSR|S_IWGRP, NULL, store_led_b);
 /* led_pattern node permission is 222 */
 /* To access sysfs node from other groups */
-static DEVICE_ATTR(led_pattern, 0660, NULL, store_max77843_rgb_pattern);
-static DEVICE_ATTR(led_blink, 0660, NULL,  store_max77843_rgb_blink);
-static DEVICE_ATTR(led_brightness, 0660, NULL, store_max77843_rgb_brightness);
-static DEVICE_ATTR(led_lowpower, 0660, NULL,  store_max77843_rgb_lowpower);
+static DEVICE_ATTR(led_pattern, S_IWUSR|S_IWGRP, NULL, store_max77843_rgb_pattern);
+static DEVICE_ATTR(led_blink, S_IWUSR|S_IWGRP, NULL,  store_max77843_rgb_blink);
+static DEVICE_ATTR(led_brightness, S_IWUSR|S_IWGRP, NULL, store_max77843_rgb_brightness);
+static DEVICE_ATTR(led_lowpower, S_IWUSR|S_IWGRP, NULL,  store_max77843_rgb_lowpower);
 #endif
 
 static struct attribute *led_class_attrs[] = {

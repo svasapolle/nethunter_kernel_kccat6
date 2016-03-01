@@ -269,7 +269,7 @@ static ssize_t qpnp_pon_dbc_store(struct device *dev,
 	return size;
 }
 
-static DEVICE_ATTR(debounce_us, 0664, qpnp_pon_dbc_show, qpnp_pon_dbc_store);
+static DEVICE_ATTR(debounce_us, S_IRUGO|S_IWUSR|S_IWGRP, qpnp_pon_dbc_show, qpnp_pon_dbc_store);
 
 /**
  * qpnp_pon_system_pwr_off - Configure system-reset PMIC for shutdown or reset
@@ -1406,7 +1406,7 @@ static ssize_t  sysfs_powerkey_onoff_show(struct device *dev,
 		return snprintf(buf, 5, "%d\n", pon->powerkey_state);
 	}
 }
-static DEVICE_ATTR(sec_powerkey_pressed, 0664 , sysfs_powerkey_onoff_show, NULL);
+static DEVICE_ATTR(sec_powerkey_pressed, S_IRUGO , sysfs_powerkey_onoff_show, NULL);
 
 
 #ifdef CONFIG_SEC_PM_DEBUG
